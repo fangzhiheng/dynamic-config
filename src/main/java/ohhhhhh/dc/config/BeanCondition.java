@@ -72,4 +72,5 @@ public class BeanCondition implements Condition {
         }
         return false;
     }
+
 }

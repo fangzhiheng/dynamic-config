@@ -33,4 +33,5 @@ public class DynamicConfigConfiguration {
     public DbConfigPostProcessor dbConfigPostProcessor(ConfigRegistry configRegistry, DataSource dataSource) {
         return new DbConfigPostProcessor(configRegistry, dataSource);
     }
+
 }

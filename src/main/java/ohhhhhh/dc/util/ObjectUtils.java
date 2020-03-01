@@ -14,9 +14,7 @@ import java.lang.reflect.Method;
  * @author fzh
  * @since 1.0
  */
-public final class ObjectUtils {
-    private ObjectUtils() {
-    }
+public final class ObjectUtils extends Utils {
 
     @Nullable
     public static Object retrieve(@NonNull Object object, @NonNull PropertyDescriptor descriptor) {
@@ -50,7 +48,7 @@ public final class ObjectUtils {
                 ReflectionUtils.makeAccessible(field);
             }
             Class<?> fieldType = field.getType();
-            if (fieldType.isInstance(arg)) {
+            if (arg == null || fieldType.isInstance(arg)) {
                 ReflectionUtils.setField(field, object, arg);
             }
         } else {
@@ -58,9 +56,10 @@ public final class ObjectUtils {
                 ReflectionUtils.makeAccessible(setter);
             }
             MethodParameter methodParameter = BeanUtils.getWriteMethodParameter(descriptor);
-            if (methodParameter.getParameterType().isInstance(arg)) {
+            if (arg == null || methodParameter.getParameterType().isInstance(arg)) {
                 ReflectionUtils.invokeMethod(setter, object, arg);
             }
         }
     }
+
 }

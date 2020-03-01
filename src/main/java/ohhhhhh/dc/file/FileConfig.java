@@ -9,6 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 文件类型配置注解
+ *
  * @author fzh
  * @since 1.0
  */

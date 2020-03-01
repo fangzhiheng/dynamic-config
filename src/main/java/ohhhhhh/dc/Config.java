@@ -6,9 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 动态配置标记注解，
+ * 配置注解
  *
  * @author fzh
+ * @see CommonConfigDescription
  * @since 1.0
  */
 @Target(ElementType.TYPE)
@@ -16,4 +17,5 @@ import java.lang.annotation.Target;
 public @interface Config {
 
     String name() default "";
+
 }

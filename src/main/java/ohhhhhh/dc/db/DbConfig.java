@@ -9,6 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 数据库类型配置注解
+ *
  * @author fzh
  * @since 1.0
  */
@@ -21,4 +23,5 @@ public @interface DbConfig {
     String name() default "";
 
     String sql();
+
 }

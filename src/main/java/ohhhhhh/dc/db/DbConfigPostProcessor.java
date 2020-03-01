@@ -1,8 +1,7 @@
 package ohhhhhh.dc.db;
 
+import ohhhhhh.dc.AbstractConfigDescription;
 import ohhhhhh.dc.AbstractConfigPostProcessor;
-import ohhhhhh.dc.Config;
-import ohhhhhh.dc.ConfigDescription;
 import ohhhhhh.dc.ConfigRegistry;
 
 import javax.sql.DataSource;
@@ -14,23 +13,24 @@ import java.util.Objects;
  * @author fzh
  * @since 1.0
  */
-public class DbConfigPostProcessor extends AbstractConfigPostProcessor {
+public class DbConfigPostProcessor extends AbstractConfigPostProcessor<DbConfig> {
 
     private final DataSource dataSource;
 
     public DbConfigPostProcessor(ConfigRegistry registry, DataSource dataSource) {
-        super(registry);
+        super(registry, DbConfig.class);
         Objects.requireNonNull(dataSource, "DataSource is necessary for " + getClass().getSimpleName());
         this.dataSource = dataSource;
     }
 
     @Override
-    protected Object enhanceConfigBean(Object bean, Config configAnnotation) {
+    protected Object enhanceConfigBean(String beanName, Object bean, DbConfig configAnnotation) {
         return null;
     }
 
     @Override
-    protected ConfigDescription resolveConfigDescription(String configName, Object enhancedConfigBean) {
+    protected AbstractConfigDescription resolveConfigDescription(String configName, Object enhancedConfigBean) {
         return null;
     }
+
 }

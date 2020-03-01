@@ -1,7 +1,5 @@
 package ohhhhhh.dc;
 
-import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +9,7 @@ import java.util.Map;
  */
 public class ConfigRegistry {
 
-    private final Map<String, ConfigDescription> configs = new HashMap<>();
+    private final Map<String, AbstractConfigDescription> configs = new HashMap<>();
 
     private final boolean allowOverride;
 
@@ -25,8 +23,8 @@ public class ConfigRegistry {
         this.allowOverride = allowOverride;
     }
 
-    public void register(String configName, ConfigDescription config) {
-        ConfigDescription exist = configs.put(configName, config);
+    public void register(String configName, AbstractConfigDescription config) {
+        AbstractConfigDescription exist = configs.put(configName, config);
         if (exist != null && !allowOverride) {
             throw new IllegalStateException(String.format("config [%s] contains multiple[old: %s, new: %s].", configName, config, exist));
         }
@@ -34,10 +32,10 @@ public class ConfigRegistry {
         if (afterRegisterHook != null) {
             afterRegisterHook.run();
         }
-        config.afterUpdate(() -> this.setLatestVersion(config.getLatestVersion()));
+        config.setAfterUpdateHook(() -> this.setLatestVersion(config.getLatestVersion()));
     }
 
-    public ConfigDescription getConfig(String configName) {
+    public AbstractConfigDescription getConfig(String configName) {
         return configs.get(configName);
     }
 
@@ -48,4 +46,5 @@ public class ConfigRegistry {
     protected void setLatestVersion(long latestVersion) {
         this.latestVersion = latestVersion;
     }
+
 }

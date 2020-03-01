@@ -15,5 +15,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Conditional(BeanCondition.class)
 public @interface ConditionalOnBean {
+
     Class<?>[] value() default {};
+
 }
