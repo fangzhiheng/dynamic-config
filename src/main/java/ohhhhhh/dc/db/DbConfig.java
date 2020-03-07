@@ -22,6 +22,18 @@ public @interface DbConfig {
     @AliasFor(annotation = Config.class)
     String name() default "";
 
+    /**
+     * @see Config#treatMemberNameAsPlaceholder()
+     */
+    @AliasFor(annotation = Config.class)
+    boolean treatMemberNameAsPlaceholder() default false;
+
+    /**
+     * @see Config#callInitiatedIfNotFound()
+     */
+    @AliasFor(annotation = Config.class)
+    boolean callInitiatedIfNotFound() default true;
+
     String sql();
 
 }

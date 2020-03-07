@@ -1,11 +1,15 @@
 package ohhhhhh.dc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
@@ -14,6 +18,8 @@ import java.util.Objects;
  * @since 1.0
  */
 public abstract class AbstractConfigPostProcessor<A extends Annotation> implements BeanPostProcessor {
+
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final ConfigRegistry registry;
 
@@ -35,21 +41,23 @@ public abstract class AbstractConfigPostProcessor<A extends Annotation> implemen
         if (supportedAnnotationClass == null || (supportedAnnotation = AnnotatedElementUtils.findMergedAnnotation(bean.getClass(), supportedAnnotationClass)) != null) {
             Config configAnnotation = AnnotatedElementUtils.findMergedAnnotation(bean.getClass(), Config.class);
             if (configAnnotation != null) {
-                Object enhancedConfigBean = enhanceConfigBean(beanName, bean, supportedAnnotation);
                 String configName = configAnnotation.name();
                 if (StringUtils.isEmpty(configName)) {
                     configName = beanName;
                 }
-                AbstractConfigDescription description = resolveConfigDescription(configName, enhancedConfigBean);
+                AbstractConfigDescription description;
+                try {
+                    description = resolveConfigDescription(configName, bean, supportedAnnotation);
+                } catch (IOException e) {
+                    throw new BeanInitializationException("process bean " + beanName + " failed", e);
+                }
                 registry.register(configName, description);
-                return enhancedConfigBean;
+                return description.getConfig();
             }
         }
         return bean;
     }
 
-    protected abstract Object enhanceConfigBean(String beanName, Object bean, A configAnnotation);
-
-    protected abstract AbstractConfigDescription resolveConfigDescription(String configName, Object enhancedConfigBean);
+    protected abstract AbstractConfigDescription resolveConfigDescription(String configName, Object enhancedConfigBean, A supportedAnnotation) throws IOException;
 
 }

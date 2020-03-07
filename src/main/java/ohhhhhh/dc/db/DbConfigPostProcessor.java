@@ -24,12 +24,7 @@ public class DbConfigPostProcessor extends AbstractConfigPostProcessor<DbConfig>
     }
 
     @Override
-    protected Object enhanceConfigBean(String beanName, Object bean, DbConfig configAnnotation) {
-        return null;
-    }
-
-    @Override
-    protected AbstractConfigDescription resolveConfigDescription(String configName, Object enhancedConfigBean) {
+    protected AbstractConfigDescription resolveConfigDescription(String configName, Object enhancedConfigBean, DbConfig supportedAnnotation) {
         return null;
     }
 

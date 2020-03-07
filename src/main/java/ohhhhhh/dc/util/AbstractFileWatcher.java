@@ -2,7 +2,7 @@ package ohhhhhh.dc.util;
 
 import java.nio.file.Path;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -13,7 +13,7 @@ import java.util.function.Consumer;
  */
 public abstract class AbstractFileWatcher implements FileWatcher {
 
-    private final Executor watcher;
+    private final ExecutorService watcher;
 
     private Consumer<Path> consumer;
 
@@ -25,7 +25,7 @@ public abstract class AbstractFileWatcher implements FileWatcher {
         status = WatcherStatus.STOPPED;
     }
 
-    protected Executor getWatcher() {
+    protected ExecutorService getWatcher() {
         return watcher;
     }
 
@@ -35,6 +35,7 @@ public abstract class AbstractFileWatcher implements FileWatcher {
 
     public void stop() {
         this.status = WatcherStatus.STOPPED;
+        getWatcher().shutdownNow();
     }
 
     @Override
@@ -52,6 +53,16 @@ public abstract class AbstractFileWatcher implements FileWatcher {
     @Override
     public WatcherStatus getStatus() {
         return status;
+    }
+
+    @Override
+    public void afterPropertiesSet() {
+        this.start();
+    }
+
+    @Override
+    public void destroy() {
+        this.stop();
     }
 
 }

@@ -18,4 +18,14 @@ public @interface Config {
 
     String name() default "";
 
+    /**
+     * @return 是否把字段或者方法名作为占位符
+     */
+    boolean treatMemberNameAsPlaceholder() default false;
+
+    /**
+     * @return 是否在没有找到占位符的时候使用原始方法返回值
+     */
+    boolean callInitiatedIfNotFound() default true;
+
 }

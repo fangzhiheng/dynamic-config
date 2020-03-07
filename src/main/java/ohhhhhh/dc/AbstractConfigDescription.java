@@ -110,4 +110,8 @@ public abstract class AbstractConfigDescription {
         return afterRegisterHook;
     }
 
+    public void touch() {
+        this.latestVersion = System.currentTimeMillis();
+    }
+
 }
