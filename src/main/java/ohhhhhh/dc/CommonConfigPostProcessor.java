@@ -11,8 +11,8 @@ public class CommonConfigPostProcessor extends AbstractConfigPostProcessor<Confi
     }
 
     @Override
-    protected AbstractConfigDescription resolveConfigDescription(String configName, Object enhancedConfigBean, Config supportedAnnotation) {
-        return new CommonConfigDescription(configName, enhancedConfigBean);
+    protected AbstractConfigDescription resolveConfigDescription(String configName, Object bean, Config supportedAnnotation) {
+        return new CommonConfigDescription(configName, bean);
     }
 
 }

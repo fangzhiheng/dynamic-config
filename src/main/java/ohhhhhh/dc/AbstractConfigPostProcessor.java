@@ -58,6 +58,6 @@ public abstract class AbstractConfigPostProcessor<A extends Annotation> implemen
         return bean;
     }
 
-    protected abstract AbstractConfigDescription resolveConfigDescription(String configName, Object enhancedConfigBean, A supportedAnnotation) throws IOException;
+    protected abstract AbstractConfigDescription resolveConfigDescription(String configName, Object bean, A supportedAnnotation) throws IOException;
 
 }

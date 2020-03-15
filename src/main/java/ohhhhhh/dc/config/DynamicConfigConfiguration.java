@@ -7,8 +7,6 @@ import ohhhhhh.dc.util.FileWatcher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
-
 /**
  * @author fzh
  * @since 1.0
@@ -30,9 +28,8 @@ public class DynamicConfigConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(DbConfigPostProcessor.class)
-    @ConditionalOnBean(DataSource.class)
-    public DbConfigPostProcessor dbConfigPostProcessor(ConfigRegistry configRegistry, DataSource dataSource) {
-        return new DbConfigPostProcessor(configRegistry, dataSource);
+    public DbConfigPostProcessor dbConfigPostProcessor(ConfigRegistry configRegistry) {
+        return new DbConfigPostProcessor(configRegistry);
     }
 
     @Bean

@@ -56,7 +56,7 @@ public abstract class AbstractBeanGetterInterceptor implements MethodInterceptor
         return method.invoke(target, objects);
     }
 
-    protected abstract Object invoke(@NonNull Object target, PropertyAnnotationInfo annotationInfo, @NonNull Object[] parameters);
+    protected abstract Object invoke(@NonNull Object target, PropertyAnnotationInfo annotationInfo, @NonNull Object[] parameters) throws Exception;
 
     private boolean isGetter(Method method) {
         return method.getName().startsWith(GETTER_PREFIX);

@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
- * TODO
+ * 文件类型的可重载属性源
  *
  * @author fzh
  * @since 1.0

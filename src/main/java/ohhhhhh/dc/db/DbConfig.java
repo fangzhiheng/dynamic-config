@@ -34,6 +34,8 @@ public @interface DbConfig {
     @AliasFor(annotation = Config.class)
     boolean callInitiatedIfNotFound() default true;
 
-    String sql();
+    String defaultQuerySql() default "";
+
+    String defaultDataSource() default "";
 
 }

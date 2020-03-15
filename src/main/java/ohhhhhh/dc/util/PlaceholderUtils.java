@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public final class PlaceholderUtils extends Utils {
 
-    public static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("(?<ph>\\$\\{((?<phk>[\\w.-_\\d]+)(:(?<default>[\\w.-_\\d/]+))}))");
+    public static final Pattern PLACEHOLDER_PATTERN = Pattern.compile("(?<ph>\\$\\{(?<phk>[\\w,.\\-_\\d]+)(:(?<default>[\\w.,\\-_\\d/]+))?})");
 
     private static final int NICE = -1;
 

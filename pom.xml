@@ -6,7 +6,7 @@
 
     <groupId>ohhhhhh</groupId>
     <artifactId>dynamic-config</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-RELEASE</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -17,7 +17,7 @@
 
     <developers>
         <developer>
-            <name>方志恒</name>
+            <name>大方</name>
             <url>https://github.com/fangzhiheng</url>
             <email>iefangzh@163.com</email>
         </developer>

@@ -3,6 +3,7 @@ package ohhhhhh.dc.config;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
+import org.springframework.context.annotation.ConfigurationCondition;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 import org.springframework.lang.NonNull;
 import org.springframework.util.MultiValueMap;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author fzh
  * @since 1.0
  */
-public class BeanCondition implements Condition {
+public class BeanCondition implements Condition, ConfigurationCondition {
 
     @Override
     public boolean matches(@NonNull ConditionContext context, @NonNull AnnotatedTypeMetadata metadata) {
@@ -71,6 +72,12 @@ public class BeanCondition implements Condition {
             }
         }
         return false;
+    }
+
+    @Override
+    @NonNull
+    public ConfigurationPhase getConfigurationPhase() {
+        return ConfigurationPhase.REGISTER_BEAN;
     }
 
 }
